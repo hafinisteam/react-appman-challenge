@@ -23,6 +23,7 @@ const MyPokedex = props => {
     openModal(() => <SearchPokemon />);
   }
 
+  // render button function
   function renderRemoveButton(id) {
     return <Button onClick={() => props.removePokemon(id)}>X</Button>;
   }

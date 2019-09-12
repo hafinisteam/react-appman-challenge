@@ -45,10 +45,12 @@ const SearchPokemon = props => {
 
   const { currentPokedex, addPokemon } = props;
 
+  // memo pokedex for performance
   const memoPokedex = useMemo(() => {
     return currentPokedex.map(item => item.id);
   }, [currentPokedex]);
 
+  // check for unselected pokemons
   const remainPokemons = checkExistedPokemon(memoPokedex, pokemonList);
 
   useEffect(() => {
@@ -62,12 +64,15 @@ const SearchPokemon = props => {
       searchSub.unsubscribe();
     };
 
+    // init subscript subject for searching pokemon
+    // use rxjs operators to reduce request and optimize search functionality
     function initSearchListener() {
       searchSub = search$
         .pipe(
           debounceTime(400),
           distinctUntilChanged((prev, current) => isEqual(prev, current)),
           switchMap(query => {
+            // dispatch LOADED action when load new data
             dispatch(createAction(LOADED));
             return from(fetchPokemon(query)).pipe(map(data => data));
           })
@@ -82,6 +87,7 @@ const SearchPokemon = props => {
     }
   }, []);
 
+  // get list pokemon on mount component
   async function getPokemonList() {
     dispatch(createAction(LOADED));
     const data = await fetchPokemon();
@@ -89,6 +95,7 @@ const SearchPokemon = props => {
     dispatch(createAction(LOAD_SUCCES, { listData: pokemons }));
   }
 
+  // append new query to query subject
   function handleSearchPokemon(ev) {
     const name = ev.target.name;
     const query = search$.getValue();
@@ -99,10 +106,12 @@ const SearchPokemon = props => {
     search$.next(nextValue);
   }
 
+  // add new pokemon to pokedex
   function handleAddPokedex(pokemon) {
     addPokemon(pokemon);
   }
 
+  // check for unselected pokemon
   function checkExistedPokemon(memoPokedex, dataSource) {
     return dataSource.filter(item => {
       const existed = memoPokedex.findIndex(memo => memo === item.id);
