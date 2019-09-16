@@ -15,4 +15,4 @@ const Button = ({ onClick, children }) => {
   return <ButtonStyled onClick={onClick}>{children}</ButtonStyled>;
 };
 
-export default Button;
+export default React.memo(Button);

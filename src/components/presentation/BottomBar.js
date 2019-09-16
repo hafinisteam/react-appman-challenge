@@ -35,4 +35,4 @@ const BottomBar = ({ handleOpenModal }) => {
   );
 };
 
-export default BottomBar;
+export default React.memo(BottomBar);

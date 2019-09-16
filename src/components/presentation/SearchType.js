@@ -28,4 +28,4 @@ const SearchType = ({ onChangeRadio }) => {
   );
 };
 
-export default SearchType;
+export default React.memo(SearchType);

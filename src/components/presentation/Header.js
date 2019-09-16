@@ -21,4 +21,4 @@ const Header = ({ title }) => {
   return <HeaderStyled>{title}</HeaderStyled>;
 };
 
-export default Header;
+export default React.memo(Header);

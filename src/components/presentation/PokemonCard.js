@@ -17,7 +17,7 @@ const CardStyled = styled.div`
   padding-right: 30px;
   transition: box-shadow 0.2s ease;
   position: relative;
-  
+
   .card-img {
     flex-basis: 0;
   }
@@ -25,7 +25,7 @@ const CardStyled = styled.div`
     flex-basis: 100%;
     padding-top: 5px;
   }
-  .card-button{
+  .card-button {
     position: absolute;
     right: 5px;
     top: 5px;
@@ -99,7 +99,11 @@ const PokemonCard = ({ pokemon, button }) => {
     str: getStrength(pokemon.attacks),
     weak: getWeakness(pokemon.weaknesses),
     damage: getDamage(pokemon.attacks),
-    level: getHappiness(getHP(pokemon.hp), getDamage(pokemon.attacks), getWeakness(pokemon.weaknesses))
+    level: getHappiness(
+      getHP(pokemon.hp),
+      getDamage(pokemon.attacks),
+      getWeakness(pokemon.weaknesses)
+    )
   };
   return (
     <CardStyled>
@@ -119,9 +123,9 @@ const PokemonCard = ({ pokemon, button }) => {
           </div>
         </div>
       </div>
-      {button ? <div className="card-button">{(button())}</div> : null}
+      {button ? <div className="card-button">{button()}</div> : null}
     </CardStyled>
   );
 };
 
-export default PokemonCard;
+export default React.memo(PokemonCard);

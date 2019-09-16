@@ -70,4 +70,4 @@ const RadioButton = ({ color, label, name, forID, value, currentValue, onChange 
   );
 };
 
-export default RadioButton;
+export default React.memo(RadioButton);

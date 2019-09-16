@@ -73,4 +73,4 @@ const PokemonList = ({ dataSouce, showLoading, handleButtonClick }) => {
   );
 };
 
-export default PokemonList;
+export default React.memo(PokemonList);
